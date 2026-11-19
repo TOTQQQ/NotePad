@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="16dp">
+
+    <View
+        android:layout_width="32dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/sheet_handle" />
+
+    <LinearLayout
+        android:id="@+id/pin_sheet_option"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sheet_row_height"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/editor_padding"
+        android:paddingRight="@dimen/editor_padding">
+
+        <ImageView
+            android:id="@+id/pin_sheet_icon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:text="@string/menu_pin"
+            android:textColor="?attr/noteTextBody"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/pin_sheet_check"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/share_sheet_option"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sheet_row_height"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/editor_padding"
+        android:paddingRight="@dimen/editor_padding">
+
+        <ImageView
+            android:id="@+id/share_sheet_icon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:text="@string/share_note"
+            android:textColor="?attr/noteTextBody"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/category_sheet_option"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sheet_row_height"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/editor_padding"
+        android:paddingRight="@dimen/editor_padding">
+
+        <ImageView
+            android:id="@+id/category_sheet_icon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:text="@string/note_category"
+            android:textColor="?attr/noteTextBody"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/todo_sheet_option"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sheet_row_height"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/editor_padding"
+        android:paddingRight="@dimen/editor_padding">
+
+        <ImageView
+            android:id="@+id/todo_sheet_icon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:text="@string/menu_todo"
+            android:textColor="?attr/noteTextBody"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/todo_sheet_check"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:contentDescription="@null"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/revert_sheet_option"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/sheet_row_height"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/editor_padding"
+        android:paddingRight="@dimen/editor_padding"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/revert_sheet_icon"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1"
+            android:text="@string/sheet_revert"
+            android:textColor="?attr/noteTextBody"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

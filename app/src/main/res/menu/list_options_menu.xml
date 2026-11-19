@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--  If there is currently data in the clipboard, this adds a PASTE menu item to the menu
+          so that the user can paste in the data.. -->
+    <item android:id="@+id/menu_paste"
+          android:title="@string/menu_paste"
+          android:alphabeticShortcut='p' />
+    <item android:id="@+id/menu_theme"
+          android:title="@string/menu_dark_theme" />
+</menu>

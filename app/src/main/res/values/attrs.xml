@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="notePageBackground" format="color" />
+    <attr name="noteCardBackground" format="color" />
+    <attr name="noteSearchBackground" format="color" />
+    <attr name="noteTextPrimary" format="color" />
+    <attr name="noteTextBody" format="color" />
+    <attr name="noteTextSummary" format="color" />
+    <attr name="noteTextHint" format="color" />
+    <attr name="noteIconColor" format="color" />
+    <attr name="noteBrandColor" format="color" />
+    <attr name="noteDividerColor" format="color" />
+</resources>

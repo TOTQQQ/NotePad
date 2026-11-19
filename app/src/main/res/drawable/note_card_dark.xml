@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="@dimen/card_shadow_offset">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/card_radius" />
+            <solid android:color="@color/card_shadow_dark" />
+        </shape>
+    </item>
+    <item android:bottom="@dimen/card_shadow_offset">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/card_radius" />
+            <solid android:color="@color/card_dark" />
+        </shape>
+    </item>
+</layer-list>

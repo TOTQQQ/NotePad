@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.NotePad.Light" parent="android:style/Theme.Holo.Light">
+        <item name="android:windowBackground">@color/page_light</item>
+        <item name="android:actionBarStyle">@style/NotePadActionBar.Light</item>
+        <item name="android:colorAccent">@color/brand_primary</item>
+        <item name="notePageBackground">@color/page_light</item>
+        <item name="noteCardBackground">@color/card_light</item>
+        <item name="noteSearchBackground">@color/search_light</item>
+        <item name="noteTextPrimary">@color/text_primary_light</item>
+        <item name="noteTextBody">@color/text_body_light</item>
+        <item name="noteTextSummary">@color/text_summary_light</item>
+        <item name="noteTextHint">@color/text_hint_light</item>
+        <item name="noteIconColor">@color/text_body_light</item>
+        <item name="noteBrandColor">@color/brand_primary_emphasis</item>
+        <item name="noteDividerColor">@color/editor_divider_light</item>
+    </style>
+
+    <style name="Theme.NotePad.Dark" parent="android:style/Theme.Holo">
+        <item name="android:windowBackground">@color/page_dark</item>
+        <item name="android:actionBarStyle">@style/NotePadActionBar.Dark</item>
+        <item name="android:colorAccent">@color/brand_primary_dark</item>
+        <item name="notePageBackground">@color/page_dark</item>
+        <item name="noteCardBackground">@color/card_dark</item>
+        <item name="noteSearchBackground">@color/search_dark</item>
+        <item name="noteTextPrimary">@color/text_primary_dark</item>
+        <item name="noteTextBody">@color/text_body_dark</item>
+        <item name="noteTextSummary">@color/text_summary_dark</item>
+        <item name="noteTextHint">@color/text_hint_dark</item>
+        <item name="noteIconColor">@color/text_body_dark</item>
+        <item name="noteBrandColor">@color/brand_primary_dark</item>
+        <item name="noteDividerColor">@color/editor_divider_dark</item>
+    </style>
+
+    <style name="NotePadActionBar.Light" parent="android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/action_bar_light</item>
+        <item name="android:titleTextStyle">@style/NotePadActionBarTitle.Light</item>
+    </style>
+
+    <style name="NotePadActionBar.Dark" parent="android:style/Widget.Holo.ActionBar">
+        <item name="android:background">@color/action_bar_dark</item>
+        <item name="android:titleTextStyle">@style/NotePadActionBarTitle.Dark</item>
+    </style>
+
+    <style name="NotePadActionBarTitle.Light" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/text_primary_light</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="NotePadActionBarTitle.Dark" parent="android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/text_primary_dark</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
