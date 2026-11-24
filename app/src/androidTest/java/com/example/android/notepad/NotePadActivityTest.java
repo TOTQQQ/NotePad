@@ -162,6 +162,19 @@ public class NotePadActivityTest extends ActivityInstrumentationTestCase2<NotesL
         assertEquals("First line Second line Third line", summary.getText().toString());
     }
 
+    public void testListItemTitleIsLargeAndBold() {
+        insertNote(TEST_TITLE_PREFIX + "title style", "Content", TEST_MODIFICATION_DATE);
+        NotesList activity = getActivity();
+        getInstrumentation().waitForIdleSync();
+
+        TextView title = (TextView) getNoteView(activity,
+                TEST_TITLE_PREFIX + "title style").findViewById(android.R.id.text1);
+        assertTrue("List title should be bold", title.getTypeface().isBold());
+        assertEquals("List title should use 18sp text", 18f,
+                title.getTextSize() / activity.getResources().getDisplayMetrics().scaledDensity,
+                0.2f);
+    }
+
     public void testSearchMatchesTitle() {
         insertNote(TEST_TITLE_PREFIX + "shopping", "First note", TEST_MODIFICATION_DATE);
         insertNote(TEST_TITLE_PREFIX + "journal", "Second note", TEST_MODIFICATION_DATE + 1);
@@ -352,6 +365,33 @@ public class NotePadActivityTest extends ActivityInstrumentationTestCase2<NotesL
     public void testListItemUsesFirstLineWhenTitleEmpty() {
         ContentValues values = new ContentValues();
         values.put(NotePad.Notes.COLUMN_NAME_TITLE, "");
+        values.put(NotePad.Notes.COLUMN_NAME_NOTE, "First line\nSecond line");
+        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, TEST_MODIFICATION_DATE);
+        Uri noteUri = getInstrumentation().getTargetContext().getContentResolver().insert(
+                NotePad.Notes.CONTENT_URI, values);
+        NotesList activity = getActivity();
+        getInstrumentation().waitForIdleSync();
+
+        int position = -1;
+        for (int index = 0; index < activity.getListAdapter().getCount(); index++) {
+            if (activity.getListAdapter().getItemId(index)
+                    == Long.parseLong(noteUri.getLastPathSegment())) {
+                position = index;
+                break;
+            }
+        }
+        assertTrue("Inserted note should be displayed", position >= 0);
+        View item = activity.getListAdapter().getView(position, null, activity.getListView());
+        TextView title = (TextView) item.findViewById(android.R.id.text1);
+        TextView summary = (TextView) item.findViewById(R.id.note_summary);
+        assertEquals("First line", title.getText().toString());
+        assertEquals("Second line", summary.getText().toString());
+    }
+
+    public void testListItemTreatsLegacySystemTitleAsEmpty() {
+        ContentValues values = new ContentValues();
+        values.put(NotePad.Notes.COLUMN_NAME_TITLE,
+                android.content.res.Resources.getSystem().getString(android.R.string.untitled));
         values.put(NotePad.Notes.COLUMN_NAME_NOTE, "First line\nSecond line");
         values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, TEST_MODIFICATION_DATE);
         Uri noteUri = getInstrumentation().getTargetContext().getContentResolver().insert(
@@ -579,6 +619,53 @@ public class NotePadActivityTest extends ActivityInstrumentationTestCase2<NotesL
                     getNoteValue(noteUri, NotePad.Notes.COLUMN_NAME_TITLE));
             assertEquals("你好，这是一段中文笔记。",
                     getNoteValue(noteUri, NotePad.Notes.COLUMN_NAME_NOTE));
+        } finally {
+            finishEditor(editor);
+        }
+    }
+
+    public void testEditorAcceptsChineseImeComposition() {
+        Uri noteUri = insertNote(TEST_TITLE_PREFIX + "Chinese IME", "",
+                TEST_MODIFICATION_DATE);
+        final NoteEditor editor = openEditor(noteUri);
+        try {
+            final EditText body = (EditText) editor.findViewById(R.id.note);
+            editor.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    body.requestFocus();
+                    body.setSelection(body.getText().length());
+                    android.view.inputmethod.EditorInfo editorInfo =
+                            new android.view.inputmethod.EditorInfo();
+                    android.view.inputmethod.InputConnection connection =
+                            body.onCreateInputConnection(editorInfo);
+                    connection.beginBatchEdit();
+                    connection.setComposingText("ni hao", 1);
+                    connection.commitText("你好", 1);
+                    connection.finishComposingText();
+                    connection.endBatchEdit();
+                }
+            });
+            getInstrumentation().waitForIdleSync();
+
+            assertEquals("Chinese text committed by an IME should be preserved", "你好",
+                    body.getText().toString());
+        } finally {
+            finishEditor(editor);
+        }
+    }
+
+    public void testEditorTreatsLegacySystemTitleAsEmpty() {
+        ContentValues values = new ContentValues();
+        values.put(NotePad.Notes.COLUMN_NAME_TITLE,
+                android.content.res.Resources.getSystem().getString(android.R.string.untitled));
+        values.put(NotePad.Notes.COLUMN_NAME_NOTE, "Body");
+        values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, TEST_MODIFICATION_DATE);
+        Uri noteUri = getInstrumentation().getTargetContext().getContentResolver().insert(
+                NotePad.Notes.CONTENT_URI, values);
+        NoteEditor editor = openEditor(noteUri);
+        try {
+            assertEquals("", findEditorTitle(editor).getText().toString());
         } finally {
             finishEditor(editor);
         }

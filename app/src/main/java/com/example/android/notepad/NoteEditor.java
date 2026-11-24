@@ -357,6 +357,11 @@ public class NoteEditor extends Activity {
                 NotePad.Notes.COLUMN_NAME_CATEGORY));
         String title = mCursor.getString(mCursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_TITLE));
         String note = mCursor.getString(mCursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_NOTE));
+        String legacyUntitled = android.content.res.Resources.getSystem().getString(
+                android.R.string.untitled);
+        if (title != null && legacyUntitled.equals(title.trim())) {
+            title = "";
+        }
         mTitle.setTextKeepState(title);
         mText.setTextKeepState(note);
         setTitle(title == null || title.trim().length() == 0

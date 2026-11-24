@@ -613,6 +613,16 @@ public class NotePadProviderTest extends ProviderTestCase2<NotePadProvider> {
       assertEquals(inputNoteId, cursor.getInt(0));
     }
 
+    public void testInsertedNoteDefaultsToEmptyTitle() {
+        Uri noteUri = mMockResolver.insert(NotePad.Notes.CONTENT_URI, null);
+        Cursor cursor = mMockResolver.query(noteUri,
+                new String[] { NotePad.Notes.COLUMN_NAME_TITLE }, null, null, null);
+        assertTrue(cursor.moveToFirst());
+        assertEquals("New notes should not use the system <Untitled> placeholder", "",
+                cursor.getString(cursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_TITLE)));
+        cursor.close();
+    }
+
     public void testTodoColumnsDefaultAndUpdate() {
         Uri noteUri = mMockResolver.insert(NotePad.Notes.CONTENT_URI, null);
         Cursor cursor = mMockResolver.query(noteUri, null, null, null, null);

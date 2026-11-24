@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.UriMatcher;
 import android.content.ContentProvider.PipeDataWriter;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -550,10 +549,9 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
             values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE, now);
         }
 
-        // If the values map doesn't contain a title, sets the value to the default title.
+        // Keep the title empty so the editor can show its hint instead of a system placeholder.
         if (values.containsKey(NotePad.Notes.COLUMN_NAME_TITLE) == false) {
-            Resources r = Resources.getSystem();
-            values.put(NotePad.Notes.COLUMN_NAME_TITLE, r.getString(android.R.string.untitled));
+            values.put(NotePad.Notes.COLUMN_NAME_TITLE, "");
         }
 
         // If the values map doesn't contain note text, sets the value to an empty string.

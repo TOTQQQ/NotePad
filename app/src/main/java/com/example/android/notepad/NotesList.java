@@ -383,7 +383,7 @@ public class NotesList extends ListActivity {
 
     private String getDisplayTitle(Cursor cursor) {
         String title = cursor.getString(cursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_TITLE));
-        if (title != null && title.trim().length() > 0) {
+        if (hasCustomTitle(title)) {
             return title.trim();
         }
         String note = cursor.getString(cursor.getColumnIndex(NotePad.Notes.COLUMN_NAME_NOTE));
@@ -407,8 +407,7 @@ public class NotesList extends ListActivity {
             }
             if (firstContentLine) {
                 firstContentLine = false;
-                if (title == null || title.trim().length() == 0
-                        || cleanLine.equals(title.trim())) {
+                if (!hasCustomTitle(title) || cleanLine.equals(title.trim())) {
                     continue;
                 }
             }
@@ -418,6 +417,15 @@ public class NotesList extends ListActivity {
             summary.append(cleanLine);
         }
         return summary.toString();
+    }
+
+    private boolean hasCustomTitle(String title) {
+        if (title == null || title.trim().length() == 0) {
+            return false;
+        }
+        String legacyUntitled = android.content.res.Resources.getSystem().getString(
+                android.R.string.untitled);
+        return !legacyUntitled.equals(title.trim());
     }
 
     private String getFirstContentLine(String note) {
